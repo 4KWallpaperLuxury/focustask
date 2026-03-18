@@ -10,9 +10,9 @@
             --purple: #6750A4;
             --bg: #F8F7FB;
             --black: #17161C;
-            --card-yellow: #FFF3C4;
-            --card-green: #C6F6D5;
-            --card-blue: #BFDBFE;
+            --yellow: #FFF3C4;
+            --green: #C6F6D5;
+            --blue: #BFDBFE;
             --shadow: 5px 5px 0px var(--black);
             --border: 3px solid var(--black);
         }
@@ -24,7 +24,7 @@
             line-height: 1.75;
         }
 
-        /* ── LANG SWITCHER ── */
+        /* LANG BAR */
         .lang-bar {
             background: var(--black);
             padding: 10px 20px;
@@ -59,7 +59,7 @@
             color: white;
         }
 
-        /* ── HEADER ── */
+        /* HEADER */
         header {
             background: var(--purple);
             border-bottom: 4px solid var(--black);
@@ -120,7 +120,7 @@
             z-index: 1;
         }
 
-        /* ── MAIN ── */
+        /* MAIN */
         main {
             max-width: 800px;
             margin: 0 auto;
@@ -148,7 +148,7 @@
         }
         .badge {
             display: inline-block;
-            background: var(--card-yellow);
+            background: var(--yellow);
             border: 2px solid var(--black);
             padding: 2px 10px;
             font-size: 0.7rem;
@@ -156,8 +156,8 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
-        .badge.green { background: var(--card-green); }
-        .badge.blue  { background: var(--card-blue); }
+        .badge.green { background: var(--green); }
+        .badge.blue  { background: var(--blue); }
 
         section p, section li {
             font-size: 0.95rem;
@@ -169,8 +169,7 @@
         section ul li { margin-bottom: 8px; }
         section ul li::marker { color: var(--purple); font-weight: bold; }
 
-        .highlight-box {
-            background: var(--card-green);
+        .box {
             border: 2px solid var(--black);
             padding: 16px 20px;
             margin-top: 16px;
@@ -178,29 +177,14 @@
             font-weight: 600;
             line-height: 1.7;
         }
-        .info-box {
-            background: var(--card-blue);
-            border: 2px solid var(--black);
-            padding: 16px 20px;
-            margin-top: 16px;
-            font-size: 0.92rem;
-            font-weight: 600;
-            line-height: 1.7;
-        }
-        .warning-box {
-            background: var(--card-yellow);
-            border: 2px solid var(--black);
-            padding: 16px 20px;
-            margin-top: 16px;
-            font-size: 0.92rem;
-            font-weight: 600;
-            line-height: 1.7;
-        }
+        .box.green  { background: var(--green); }
+        .box.blue   { background: var(--blue); }
+        .box.yellow { background: var(--yellow); }
 
         a { color: var(--purple); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--purple); }
         a:hover { background: var(--purple); color: white; }
 
-        /* ── FOOTER ── */
+        /* FOOTER */
         footer {
             background: var(--black);
             color: white;
@@ -216,16 +200,8 @@
             margin-bottom: 8px;
         }
         footer p { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
-        footer a { color: var(--card-yellow); border-bottom-color: var(--card-yellow); }
-        footer a:hover { background: var(--card-yellow); color: var(--black); }
-
-        /* ── LANG CONTENT ── */
-        .lang-en, .lang-vi { display: none; }
-        body.lang-en .lang-en { display: block; }
-        body.lang-vi .lang-vi { display: block; }
-        span.lang-en, span.lang-vi { display: none; }
-        body.lang-en span.lang-en { display: inline; }
-        body.lang-vi span.lang-vi { display: inline; }
+        footer a { color: var(--yellow); border-bottom-color: var(--yellow); }
+        footer a:hover { background: var(--yellow); color: var(--black); }
 
         @media (max-width: 600px) {
             header h1 { font-size: 1.6rem; }
@@ -233,243 +209,238 @@
         }
     </style>
 </head>
-<body class="lang-en">
+<body>
 
+<!-- LANG BAR -->
 <div class="lang-bar">
-    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
-    <button class="lang-btn" onclick="setLang('vi')" id="btn-vi">VI</button>
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-vi" onclick="setLang('vi')">VI</button>
 </div>
 
+<!-- HEADER -->
 <header>
     <div class="logo"><span>GUNGSA STUDIO</span></div>
-    <h1>
-        <span class="lang-en">Privacy Policy</span>
-        <span class="lang-vi">Chính Sách Quyền Riêng Tư</span>
-    </h1>
-    <p class="updated">
-        <span class="lang-en">Last updated: March 18, 2026</span>
-        <span class="lang-vi">Cập nhật lần cuối: 18 tháng 3, 2026</span>
-    </p>
+    <h1 id="h-title">Privacy Policy</h1>
+    <p class="updated" id="h-date">Last updated: March 18, 2026</p>
 </header>
 
-<main>
+<!-- MAIN -->
+<main id="content"></main>
 
-<!-- ══════════ ENGLISH ══════════ -->
-<div class="lang-en">
-
-    <section>
-        <h2>1. Introduction <span class="badge">Overview</span></h2>
-        <p><strong>Focus Tasks</strong> is a productivity application developed by <strong>GUNGSA STUDIO</strong>. We are committed to protecting your privacy and handling your personal data responsibly and transparently.</p>
-        <p>This Privacy Policy describes the information we collect, how it is used and stored, and the rights available to you. By using Focus Tasks, you acknowledge that you have read and agree to the practices described herein.</p>
-        <div class="highlight-box">
-            🔒 Focus Tasks is built on a <strong>privacy-first</strong> principle. We collect only what is strictly necessary to deliver the service — nothing more.
-        </div>
-    </section>
-
-    <section>
-        <h2>2. Information We Collect <span class="badge green">Data</span></h2>
-        <p>The information we collect depends on the mode in which you choose to use the app:</p>
-        <ul>
-            <li><strong>Guest Mode:</strong> All data remains exclusively on your device. No personal identifiers are collected or transmitted to our servers.</li>
-            <li><strong>Google Sign-In:</strong> When you sign in with a Google account, we receive your <strong>name</strong> and <strong>email address</strong> via Google's authentication service. This information is used solely to identify your account and enable cross-device synchronization. We do not access any other Google services or data on your behalf.</li>
-            <li><strong>Anonymous Sign-In:</strong> You may use the app through a temporary session without providing any personal information. Please note that anonymous sessions cannot be recovered if the app is uninstalled or app data is cleared.</li>
-            <li><strong>App Content:</strong> When signed in, we store the content you create within the app — including tasks, checklists, completion records, reminders, and settings — for the purpose of synchronization across your devices.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>3. Data Storage &amp; Synchronization <span class="badge blue">Storage</span></h2>
-        <p>Focus Tasks is designed with an <strong>offline-first</strong> architecture. The app functions fully without an internet connection. Cloud synchronization is an optional feature available exclusively to signed-in users.</p>
-        <ul>
-            <li><strong>Local Storage:</strong> All app data — including tasks, reminders, and preferences — is stored securely on your device and remains accessible without an internet connection.</li>
-            <li><strong>Cloud Synchronization:</strong> When signed in, your data is securely synchronized to <strong>Google Firebase Firestore</strong>, enabling seamless access across multiple devices.</li>
-        </ul>
-        <div class="info-box">
-            ☁️ Cloud synchronization is only active when you are signed in. Data belonging to Guest users never leaves their device.
-        </div>
-    </section>
-
-    <section>
-        <h2>4. Third-Party Services <span class="badge">Services</span></h2>
-        <p>Focus Tasks relies on the following Google Firebase services to support core functionality:</p>
-        <ul>
-            <li><strong>Firebase Authentication:</strong> Manages secure sign-in via Google and temporary anonymous sessions.</li>
-            <li><strong>Firebase Cloud Firestore:</strong> Stores and synchronizes your task data securely in the cloud.</li>
-            <li><strong>Firebase Crashlytics &amp; Performance Monitoring:</strong> Collects anonymized diagnostic data to help us identify errors and improve app reliability. No personally identifiable information is included in these reports.</li>
-            <li><strong>Firebase Cloud Messaging:</strong> Delivers system notifications and in-app announcements from GUNGSA STUDIO. This service is not used for marketing or promotional communications.</li>
-        </ul>
-        <p>These services are governed by Google's data processing terms. For further details, please refer to the <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.</p>
-    </section>
-
-    <section>
-        <h2>5. App Permissions <span class="badge green">Permissions</span></h2>
-        <p>Focus Tasks requests only the permissions necessary to deliver its reminder functionality:</p>
-        <ul>
-            <li><strong>Notifications:</strong> To deliver task reminders and due-date alerts. This permission may be denied or revoked at any time without affecting core app functionality.</li>
-            <li><strong>Exact Alarms:</strong> To schedule reminders at the precise times defined by the user.</li>
-            <li><strong>Boot Completed:</strong> To restore scheduled reminders automatically after the device restarts.</li>
-        </ul>
-        <div class="warning-box">
-            ⚠️ These permissions are used <strong>solely</strong> for reminder delivery and are never used for tracking, advertising, or any form of data collection.
-        </div>
-    </section>
-
-    <section>
-        <h2>6. Data Security <span class="badge blue">Security</span></h2>
-        <p>We implement appropriate technical measures to protect your data from unauthorized access or disclosure:</p>
-        <ul>
-            <li><strong>PIN Lock:</strong> An optional passcode can be enabled to restrict physical access to the app on your device.</li>
-            <li><strong>Encrypted Transmission:</strong> All data exchanged between your device and our servers is encrypted using HTTPS.</li>
-            <li><strong>Local Data Protection:</strong> Data stored on your device is protected against unauthorized extraction by third-party tools.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>7. Your Data Rights <span class="badge">Rights</span></h2>
-        <p>You retain full control over your data at all times:</p>
-        <ul>
-            <li><strong>Delete Content:</strong> Tasks and other app content may be permanently deleted directly within the app at any time.</li>
-            <li><strong>Account Deletion:</strong> To request deletion of your account and all associated cloud data, please contact us at the email address below. Requests will be processed promptly.</li>
-            <li><strong>Guest Mode:</strong> Uninstalling the app will permanently remove all locally stored data from your device.</li>
-        </ul>
-        <div class="highlight-box">
-            🗑️ Upon confirmed account deletion, all associated data is permanently and irreversibly removed from our servers.
-        </div>
-    </section>
-
-    <section>
-        <h2>8. Policy Updates <span class="badge green">Updates</span></h2>
-        <p>This Privacy Policy may be revised periodically to reflect changes in the app or applicable regulations. Any updates will be indicated by a revised date at the top of this page. Continued use of the app following a policy update constitutes acceptance of the revised terms.</p>
-    </section>
-
-    <section>
-        <h2>9. Contact <span class="badge blue">Contact</span></h2>
-        <p>For questions regarding this Privacy Policy or to submit a data deletion request, please contact us:</p>
-        <div class="highlight-box">
-            ✉️ <strong>Email:</strong> <a href="mailto:Bookingforjob.dev@gmail.com">Bookingforjob.dev@gmail.com</a><br>
-            🏢 <strong>Developer:</strong> GUNGSA STUDIO
-        </div>
-    </section>
-
-</div><!-- /lang-en -->
-
-
-<!-- ══════════ TIẾNG VIỆT ══════════ -->
-<div class="lang-vi">
-
-    <section>
-        <h2>1. Giới Thiệu <span class="badge">Tổng quan</span></h2>
-        <p><strong>Focus Tasks</strong> là ứng dụng năng suất được phát triển bởi <strong>GUNGSA STUDIO</strong>. Chúng tôi cam kết bảo vệ quyền riêng tư và xử lý dữ liệu cá nhân của bạn một cách có trách nhiệm và minh bạch.</p>
-        <p>Chính sách Quyền riêng tư này mô tả thông tin chúng tôi thu thập, cách thức sử dụng và lưu trữ, cũng như các quyền bạn có đối với dữ liệu của mình. Bằng việc sử dụng Focus Tasks, bạn xác nhận đã đọc và đồng ý với các điều khoản được nêu tại đây.</p>
-        <div class="highlight-box">
-            🔒 Focus Tasks được xây dựng trên nguyên tắc <strong>ưu tiên quyền riêng tư</strong>. Chúng tôi chỉ thu thập những gì thực sự cần thiết để cung cấp dịch vụ — không hơn, không kém.
-        </div>
-    </section>
-
-    <section>
-        <h2>2. Thông Tin Chúng Tôi Thu Thập <span class="badge green">Dữ liệu</span></h2>
-        <p>Thông tin được thu thập phụ thuộc vào chế độ bạn lựa chọn khi sử dụng ứng dụng:</p>
-        <ul>
-            <li><strong>Chế độ Khách:</strong> Toàn bộ dữ liệu chỉ tồn tại trên thiết bị của bạn. Chúng tôi không thu thập hay truyền bất kỳ thông tin định danh cá nhân nào đến máy chủ của chúng tôi.</li>
-            <li><strong>Đăng nhập bằng Google:</strong> Khi bạn đăng nhập qua tài khoản Google, chúng tôi nhận được <strong>tên</strong> và <strong>địa chỉ email</strong> của bạn thông qua dịch vụ xác thực của Google. Thông tin này chỉ được sử dụng để nhận dạng tài khoản và kích hoạt tính năng đồng bộ giữa các thiết bị. Chúng tôi không truy cập bất kỳ dịch vụ hay dữ liệu Google nào khác của bạn.</li>
-            <li><strong>Đăng nhập Ẩn danh:</strong> Bạn có thể sử dụng ứng dụng thông qua một phiên tạm thời mà không cần cung cấp thông tin cá nhân. Lưu ý rằng phiên ẩn danh không thể khôi phục nếu ứng dụng bị gỡ cài đặt hoặc dữ liệu ứng dụng bị xóa.</li>
-            <li><strong>Nội dung ứng dụng:</strong> Khi đã đăng nhập, chúng tôi lưu trữ nội dung bạn tạo ra trong ứng dụng — bao gồm nhiệm vụ, danh sách kiểm tra, lịch sử hoàn thành, nhắc nhở và các tùy chỉnh — phục vụ mục đích đồng bộ hóa giữa các thiết bị của bạn.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>3. Lưu Trữ &amp; Đồng Bộ Dữ Liệu <span class="badge blue">Lưu trữ</span></h2>
-        <p>Focus Tasks được thiết kế theo kiến trúc <strong>ưu tiên ngoại tuyến</strong>. Ứng dụng hoạt động đầy đủ mà không cần kết nối internet. Đồng bộ đám mây là tính năng tùy chọn chỉ dành cho người dùng đã đăng nhập.</p>
-        <ul>
-            <li><strong>Lưu trữ cục bộ:</strong> Toàn bộ dữ liệu ứng dụng — bao gồm nhiệm vụ, nhắc nhở và tùy chỉnh — được lưu trữ an toàn trên thiết bị và có thể truy cập mà không cần kết nối internet.</li>
-            <li><strong>Đồng bộ đám mây:</strong> Khi đã đăng nhập, dữ liệu của bạn được đồng bộ hóa bảo mật lên <strong>Google Firebase Firestore</strong>, cho phép truy cập liền mạch trên nhiều thiết bị.</li>
-        </ul>
-        <div class="info-box">
-            ☁️ Đồng bộ đám mây chỉ hoạt động khi bạn đã đăng nhập. Dữ liệu của người dùng Chế độ Khách không bao giờ rời khỏi thiết bị của họ.
-        </div>
-    </section>
-
-    <section>
-        <h2>4. Dịch Vụ Bên Thứ Ba <span class="badge">Dịch vụ</span></h2>
-        <p>Focus Tasks sử dụng các dịch vụ Google Firebase sau để hỗ trợ các tính năng cốt lõi của ứng dụng:</p>
-        <ul>
-            <li><strong>Firebase Authentication:</strong> Quản lý đăng nhập bảo mật qua Google và các phiên ẩn danh tạm thời.</li>
-            <li><strong>Firebase Cloud Firestore:</strong> Lưu trữ và đồng bộ hóa dữ liệu nhiệm vụ của bạn một cách an toàn trên đám mây.</li>
-            <li><strong>Firebase Crashlytics &amp; Performance Monitoring:</strong> Thu thập dữ liệu chẩn đoán ẩn danh nhằm giúp chúng tôi xác định lỗi và cải thiện độ ổn định của ứng dụng. Không có thông tin định danh cá nhân nào được đưa vào các báo cáo này.</li>
-            <li><strong>Firebase Cloud Messaging:</strong> Gửi thông báo hệ thống và thông báo nội bộ từ GUNGSA STUDIO. Dịch vụ này không được sử dụng cho mục đích tiếp thị hay quảng cáo.</li>
-        </ul>
-        <p>Các dịch vụ này tuân theo điều khoản xử lý dữ liệu của Google. Để biết thêm chi tiết, vui lòng tham khảo <a href="https://policies.google.com/privacy" target="_blank">Chính sách quyền riêng tư của Google</a>.</p>
-    </section>
-
-    <section>
-        <h2>5. Quyền Truy Cập Ứng Dụng <span class="badge green">Quyền</span></h2>
-        <p>Focus Tasks chỉ yêu cầu các quyền cần thiết để thực hiện chức năng nhắc nhở:</p>
-        <ul>
-            <li><strong>Thông báo:</strong> Để gửi nhắc nhở và cảnh báo nhiệm vụ đến thiết bị của bạn. Quyền này có thể được từ chối hoặc thu hồi bất cứ lúc nào mà không ảnh hưởng đến các chức năng chính của ứng dụng.</li>
-            <li><strong>Báo thức chính xác:</strong> Để lên lịch nhắc nhở vào đúng thời điểm bạn đã thiết lập.</li>
-            <li><strong>Khởi động thiết bị:</strong> Để tự động khôi phục các nhắc nhở đã lên lịch sau khi thiết bị khởi động lại.</li>
-        </ul>
-        <div class="warning-box">
-            ⚠️ Các quyền này được sử dụng <strong>duy nhất</strong> cho chức năng gửi nhắc nhở và không bao giờ được dùng cho mục đích theo dõi, quảng cáo hay thu thập dữ liệu dưới bất kỳ hình thức nào.
-        </div>
-    </section>
-
-    <section>
-        <h2>6. Bảo Mật Dữ Liệu <span class="badge blue">Bảo mật</span></h2>
-        <p>Chúng tôi triển khai các biện pháp kỹ thuật phù hợp để bảo vệ dữ liệu của bạn khỏi sự truy cập hoặc tiết lộ trái phép:</p>
-        <ul>
-            <li><strong>Khóa mã PIN:</strong> Bạn có thể tùy chọn bật mã PIN để hạn chế quyền truy cập vật lý vào ứng dụng trên thiết bị của mình.</li>
-            <li><strong>Mã hóa truyền tải:</strong> Tất cả dữ liệu trao đổi giữa thiết bị của bạn và máy chủ đều được mã hóa bằng giao thức HTTPS.</li>
-            <li><strong>Bảo vệ dữ liệu cục bộ:</strong> Dữ liệu được lưu trên thiết bị được bảo vệ trước các công cụ trích xuất trái phép của bên thứ ba.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>7. Quyền Của Bạn <span class="badge">Quyền hạn</span></h2>
-        <p>Bạn luôn có toàn quyền kiểm soát dữ liệu của mình:</p>
-        <ul>
-            <li><strong>Xóa nội dung:</strong> Nhiệm vụ và các nội dung khác trong ứng dụng có thể được xóa vĩnh viễn trực tiếp ngay trong ứng dụng bất cứ lúc nào.</li>
-            <li><strong>Xóa tài khoản:</strong> Để yêu cầu xóa tài khoản và toàn bộ dữ liệu đám mây liên quan, vui lòng liên hệ với chúng tôi theo địa chỉ email bên dưới. Yêu cầu sẽ được xử lý trong thời gian sớm nhất có thể.</li>
-            <li><strong>Chế độ Khách:</strong> Gỡ cài đặt ứng dụng sẽ xóa vĩnh viễn toàn bộ dữ liệu được lưu cục bộ trên thiết bị của bạn.</li>
-        </ul>
-        <div class="highlight-box">
-            🗑️ Sau khi xác nhận xóa tài khoản, toàn bộ dữ liệu liên quan sẽ bị xóa vĩnh viễn và không thể phục hồi khỏi máy chủ của chúng tôi.
-        </div>
-    </section>
-
-    <section>
-        <h2>8. Cập Nhật Chính Sách <span class="badge green">Cập nhật</span></h2>
-        <p>Chính sách này có thể được sửa đổi định kỳ để phản ánh các thay đổi trong ứng dụng hoặc các quy định pháp lý hiện hành. Mọi cập nhật sẽ được ghi nhận bằng ngày sửa đổi mới tại đầu trang này. Việc tiếp tục sử dụng ứng dụng sau khi chính sách được cập nhật đồng nghĩa với việc bạn chấp nhận các điều khoản đã sửa đổi.</p>
-    </section>
-
-    <section>
-        <h2>9. Liên Hệ <span class="badge blue">Liên hệ</span></h2>
-        <p>Nếu bạn có bất kỳ câu hỏi nào liên quan đến Chính sách này hoặc muốn gửi yêu cầu xóa dữ liệu, vui lòng liên hệ với chúng tôi:</p>
-        <div class="highlight-box">
-            ✉️ <strong>Email:</strong> <a href="mailto:Bookingforjob.dev@gmail.com">Bookingforjob.dev@gmail.com</a><br>
-            🏢 <strong>Nhà phát triển:</strong> GUNGSA STUDIO
-        </div>
-    </section>
-
-</div><!-- /lang-vi -->
-
-</main>
-
+<!-- FOOTER -->
 <footer>
     <div class="studio">GUNGSA STUDIO</div>
-    <p>
-        <span class="lang-en">Focus Tasks — Your productivity, your privacy.</span>
-        <span class="lang-vi">Focus Tasks — Năng suất của bạn, quyền riêng tư của bạn.</span>
-    </p>
-    <p style="margin-top: 12px;">© 2026 GUNGSA STUDIO. All rights reserved.</p>
+    <p id="f-tagline">Focus Tasks — Your productivity, your privacy.</p>
+    <p style="margin-top:12px">© 2026 GUNGSA STUDIO. All rights reserved.</p>
 </footer>
 
 <script>
-    function setLang(lang) {
-        document.body.className = 'lang-' + lang;
-        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-        document.getElementById('btn-vi').classList.toggle('active', lang === 'vi');
+var DATA = {
+    en: {
+        title: "Privacy Policy",
+        date: "Last updated: March 18, 2026",
+        tagline: "Focus Tasks — Your productivity, your privacy.",
+        sections: [
+            {
+                num: "1", title: "Introduction", badge: "", badgeClass: "",
+                body: `
+                <p><strong>Focus Tasks</strong> is a productivity application developed by <strong>GUNGSA STUDIO</strong>. We are committed to protecting your privacy and handling your personal data responsibly and transparently.</p>
+                <p>This Privacy Policy describes the information we collect, how it is used and stored, and the rights available to you. By using Focus Tasks, you acknowledge that you have read and agree to the practices described herein.</p>
+                <div class="box green">🔒 Focus Tasks is built on a <strong>privacy-first</strong> principle. We collect only what is strictly necessary to deliver the service — nothing more.</div>`
+            },
+            {
+                num: "2", title: "Information We Collect", badge: "Data", badgeClass: "green",
+                body: `
+                <p>The information we collect depends on the mode in which you choose to use the app:</p>
+                <ul>
+                    <li><strong>Guest Mode:</strong> All data remains exclusively on your device. No personal identifiers are collected or transmitted to our servers.</li>
+                    <li><strong>Google Sign-In:</strong> When you sign in with a Google account, we receive your <strong>name</strong> and <strong>email address</strong> via Google's authentication service. This information is used solely to identify your account and enable cross-device synchronization. We do not access any other Google services or data on your behalf.</li>
+                    <li><strong>Anonymous Sign-In:</strong> You may use the app through a temporary session without providing any personal information. Anonymous sessions cannot be recovered if the app is uninstalled or app data is cleared.</li>
+                    <li><strong>App Content:</strong> When signed in, we store the content you create — tasks, checklists, completion records, reminders, and settings — for the purpose of synchronization across your devices.</li>
+                </ul>`
+            },
+            {
+                num: "3", title: "Data Storage & Synchronization", badge: "Storage", badgeClass: "blue",
+                body: `
+                <p>Focus Tasks is designed with an <strong>offline-first</strong> architecture. The app functions fully without an internet connection. Cloud synchronization is an optional feature available exclusively to signed-in users.</p>
+                <ul>
+                    <li><strong>Local Storage:</strong> All app data — including tasks, reminders, and preferences — is stored securely on your device and remains accessible without an internet connection.</li>
+                    <li><strong>Cloud Synchronization:</strong> When signed in, your data is securely synchronized to <strong>Google Firebase Firestore</strong>, enabling seamless access across multiple devices.</li>
+                </ul>
+                <div class="box blue">☁️ Cloud synchronization is only active when you are signed in. Data belonging to Guest users never leaves their device.</div>`
+            },
+            {
+                num: "4", title: "Third-Party Services", badge: "Services", badgeClass: "",
+                body: `
+                <p>Focus Tasks relies on the following Google Firebase services to support core functionality:</p>
+                <ul>
+                    <li><strong>Firebase Authentication:</strong> Manages secure sign-in via Google and temporary anonymous sessions.</li>
+                    <li><strong>Firebase Cloud Firestore:</strong> Stores and synchronizes your task data securely in the cloud.</li>
+                    <li><strong>Firebase Crashlytics & Performance Monitoring:</strong> Collects anonymized diagnostic data to help us identify errors and improve app reliability. No personally identifiable information is included in these reports.</li>
+                    <li><strong>Firebase Cloud Messaging:</strong> Delivers system notifications and in-app announcements. This service is not used for marketing or promotional communications.</li>
+                </ul>
+                <p>These services are governed by Google's data processing terms. Please refer to the <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a> for further details.</p>`
+            },
+            {
+                num: "5", title: "App Permissions", badge: "Permissions", badgeClass: "green",
+                body: `
+                <p>Focus Tasks requests only the permissions necessary to deliver its reminder functionality:</p>
+                <ul>
+                    <li><strong>Notifications:</strong> To deliver task reminders and alerts. This permission may be denied or revoked at any time without affecting core app functionality.</li>
+                    <li><strong>Exact Alarms:</strong> To schedule reminders at the precise times defined by the user.</li>
+                    <li><strong>Boot Completed:</strong> To restore scheduled reminders automatically after the device restarts.</li>
+                </ul>
+                <div class="box yellow">⚠️ These permissions are used <strong>solely</strong> for reminder delivery and are never used for tracking, advertising, or any form of data collection.</div>`
+            },
+            {
+                num: "6", title: "Data Security", badge: "Security", badgeClass: "blue",
+                body: `
+                <p>We implement appropriate technical measures to protect your data from unauthorized access or disclosure:</p>
+                <ul>
+                    <li><strong>PIN Lock:</strong> An optional passcode can be enabled to restrict physical access to the app on your device.</li>
+                    <li><strong>Encrypted Transmission:</strong> All data exchanged between your device and our servers is encrypted using HTTPS.</li>
+                    <li><strong>Local Data Protection:</strong> Data stored on your device is protected against unauthorized extraction by third-party tools.</li>
+                </ul>`
+            },
+            {
+                num: "7", title: "Your Data Rights", badge: "Rights", badgeClass: "",
+                body: `
+                <p>You retain full control over your data at all times:</p>
+                <ul>
+                    <li><strong>Delete Content:</strong> Tasks and other app content may be permanently deleted directly within the app at any time.</li>
+                    <li><strong>Account Deletion:</strong> To request deletion of your account and all associated cloud data, please contact us at the email address below. Requests will be processed promptly.</li>
+                    <li><strong>Guest Mode:</strong> Uninstalling the app will permanently remove all locally stored data from your device.</li>
+                </ul>
+                <div class="box green">🗑️ Upon confirmed account deletion, all associated data is permanently and irreversibly removed from our servers.</div>`
+            },
+            {
+                num: "8", title: "Policy Updates", badge: "Updates", badgeClass: "green",
+                body: `<p>This Privacy Policy may be revised periodically to reflect changes in the app or applicable regulations. Any updates will be indicated by a revised date at the top of this page. Continued use of the app following a policy update constitutes acceptance of the revised terms.</p>`
+            },
+            {
+                num: "9", title: "Contact", badge: "Contact", badgeClass: "blue",
+                body: `
+                <p>For questions regarding this Privacy Policy or to submit a data deletion request, please contact us:</p>
+                <div class="box green">✉️ <strong>Email:</strong> <a href="mailto:Bookingforjob.dev@gmail.com">Bookingforjob.dev@gmail.com</a><br>🏢 <strong>Developer:</strong> GUNGSA STUDIO</div>`
+            }
+        ]
+    },
+    vi: {
+        title: "Chính Sách Quyền Riêng Tư",
+        date: "Cập nhật lần cuối: 18 tháng 3, 2026",
+        tagline: "Focus Tasks — Năng suất của bạn, quyền riêng tư của bạn.",
+        sections: [
+            {
+                num: "1", title: "Giới Thiệu", badge: "Tổng quan", badgeClass: "",
+                body: `
+                <p><strong>Focus Tasks</strong> là ứng dụng năng suất được phát triển bởi <strong>GUNGSA STUDIO</strong>. Chúng tôi cam kết bảo vệ quyền riêng tư và xử lý dữ liệu cá nhân của bạn một cách có trách nhiệm và minh bạch.</p>
+                <p>Chính sách này mô tả thông tin chúng tôi thu thập, cách thức sử dụng và lưu trữ, cũng như các quyền bạn có đối với dữ liệu của mình. Bằng việc sử dụng Focus Tasks, bạn xác nhận đã đọc và đồng ý với các điều khoản được nêu tại đây.</p>
+                <div class="box green">🔒 Focus Tasks được xây dựng trên nguyên tắc <strong>ưu tiên quyền riêng tư</strong>. Chúng tôi chỉ thu thập những gì thực sự cần thiết để cung cấp dịch vụ — không hơn, không kém.</div>`
+            },
+            {
+                num: "2", title: "Thông Tin Chúng Tôi Thu Thập", badge: "Dữ liệu", badgeClass: "green",
+                body: `
+                <p>Thông tin được thu thập phụ thuộc vào chế độ bạn lựa chọn khi sử dụng ứng dụng:</p>
+                <ul>
+                    <li><strong>Chế độ Khách:</strong> Toàn bộ dữ liệu chỉ tồn tại trên thiết bị của bạn. Chúng tôi không thu thập hay truyền bất kỳ thông tin định danh cá nhân nào đến máy chủ của chúng tôi.</li>
+                    <li><strong>Đăng nhập bằng Google:</strong> Khi bạn đăng nhập qua tài khoản Google, chúng tôi nhận được <strong>tên</strong> và <strong>địa chỉ email</strong> của bạn thông qua dịch vụ xác thực của Google. Thông tin này chỉ được sử dụng để nhận dạng tài khoản và kích hoạt đồng bộ giữa các thiết bị. Chúng tôi không truy cập bất kỳ dịch vụ hay dữ liệu Google nào khác của bạn.</li>
+                    <li><strong>Đăng nhập Ẩn danh:</strong> Bạn có thể sử dụng ứng dụng qua phiên tạm thời mà không cần cung cấp thông tin cá nhân. Phiên ẩn danh không thể khôi phục nếu ứng dụng bị gỡ cài đặt hoặc dữ liệu bị xóa.</li>
+                    <li><strong>Nội dung ứng dụng:</strong> Khi đã đăng nhập, chúng tôi lưu trữ nội dung bạn tạo ra — nhiệm vụ, danh sách kiểm tra, lịch sử hoàn thành, nhắc nhở và tùy chỉnh — phục vụ mục đích đồng bộ hóa giữa các thiết bị.</li>
+                </ul>`
+            },
+            {
+                num: "3", title: "Lưu Trữ & Đồng Bộ Dữ Liệu", badge: "Lưu trữ", badgeClass: "blue",
+                body: `
+                <p>Focus Tasks được thiết kế theo kiến trúc <strong>ưu tiên ngoại tuyến</strong>. Ứng dụng hoạt động đầy đủ mà không cần kết nối internet. Đồng bộ đám mây là tính năng tùy chọn chỉ dành cho người dùng đã đăng nhập.</p>
+                <ul>
+                    <li><strong>Lưu trữ cục bộ:</strong> Toàn bộ dữ liệu ứng dụng — bao gồm nhiệm vụ, nhắc nhở và tùy chỉnh — được lưu trữ an toàn trên thiết bị và có thể truy cập mà không cần internet.</li>
+                    <li><strong>Đồng bộ đám mây:</strong> Khi đã đăng nhập, dữ liệu được đồng bộ hóa bảo mật lên <strong>Google Firebase Firestore</strong>, cho phép truy cập liền mạch trên nhiều thiết bị.</li>
+                </ul>
+                <div class="box blue">☁️ Đồng bộ đám mây chỉ hoạt động khi bạn đã đăng nhập. Dữ liệu của người dùng Chế độ Khách không bao giờ rời khỏi thiết bị của họ.</div>`
+            },
+            {
+                num: "4", title: "Dịch Vụ Bên Thứ Ba", badge: "Dịch vụ", badgeClass: "",
+                body: `
+                <p>Focus Tasks sử dụng các dịch vụ Google Firebase sau để hỗ trợ các tính năng cốt lõi:</p>
+                <ul>
+                    <li><strong>Firebase Authentication:</strong> Quản lý đăng nhập bảo mật qua Google và các phiên ẩn danh tạm thời.</li>
+                    <li><strong>Firebase Cloud Firestore:</strong> Lưu trữ và đồng bộ hóa dữ liệu nhiệm vụ của bạn trên đám mây.</li>
+                    <li><strong>Firebase Crashlytics & Performance Monitoring:</strong> Thu thập dữ liệu chẩn đoán ẩn danh để giúp chúng tôi xác định lỗi và cải thiện độ ổn định ứng dụng. Không có thông tin định danh cá nhân nào được thu thập.</li>
+                    <li><strong>Firebase Cloud Messaging:</strong> Gửi thông báo hệ thống và thông báo nội bộ từ GUNGSA STUDIO. Dịch vụ này không được dùng cho mục đích tiếp thị.</li>
+                </ul>
+                <p>Các dịch vụ này tuân theo điều khoản xử lý dữ liệu của Google. Vui lòng tham khảo <a href="https://policies.google.com/privacy" target="_blank">Chính sách quyền riêng tư của Google</a> để biết thêm chi tiết.</p>`
+            },
+            {
+                num: "5", title: "Quyền Truy Cập Ứng Dụng", badge: "Quyền", badgeClass: "green",
+                body: `
+                <p>Focus Tasks chỉ yêu cầu các quyền cần thiết cho chức năng nhắc nhở:</p>
+                <ul>
+                    <li><strong>Thông báo:</strong> Để gửi nhắc nhở và cảnh báo nhiệm vụ. Quyền này có thể từ chối hoặc thu hồi bất cứ lúc nào mà không ảnh hưởng đến các chức năng chính.</li>
+                    <li><strong>Báo thức chính xác:</strong> Để lên lịch nhắc nhở vào đúng thời điểm bạn đã thiết lập.</li>
+                    <li><strong>Khởi động thiết bị:</strong> Để tự động khôi phục các nhắc nhở đã lên lịch sau khi thiết bị khởi động lại.</li>
+                </ul>
+                <div class="box yellow">⚠️ Các quyền này được sử dụng <strong>duy nhất</strong> cho chức năng nhắc nhở và không bao giờ được dùng cho mục đích theo dõi, quảng cáo hay thu thập dữ liệu.</div>`
+            },
+            {
+                num: "6", title: "Bảo Mật Dữ Liệu", badge: "Bảo mật", badgeClass: "blue",
+                body: `
+                <p>Chúng tôi triển khai các biện pháp kỹ thuật phù hợp để bảo vệ dữ liệu của bạn:</p>
+                <ul>
+                    <li><strong>Khóa mã PIN:</strong> Bạn có thể tùy chọn bật mã PIN để hạn chế quyền truy cập vật lý vào ứng dụng.</li>
+                    <li><strong>Mã hóa truyền tải:</strong> Tất cả dữ liệu trao đổi giữa thiết bị và máy chủ được mã hóa qua HTTPS.</li>
+                    <li><strong>Bảo vệ dữ liệu cục bộ:</strong> Dữ liệu lưu trên thiết bị được bảo vệ trước các công cụ truy cập trái phép của bên thứ ba.</li>
+                </ul>`
+            },
+            {
+                num: "7", title: "Quyền Của Bạn", badge: "Quyền hạn", badgeClass: "",
+                body: `
+                <p>Bạn luôn có toàn quyền kiểm soát dữ liệu của mình:</p>
+                <ul>
+                    <li><strong>Xóa nội dung:</strong> Nhiệm vụ và các nội dung khác có thể được xóa vĩnh viễn trực tiếp trong ứng dụng bất cứ lúc nào.</li>
+                    <li><strong>Xóa tài khoản:</strong> Để yêu cầu xóa tài khoản và toàn bộ dữ liệu đám mây liên quan, vui lòng liên hệ qua email bên dưới. Yêu cầu sẽ được xử lý trong thời gian sớm nhất.</li>
+                    <li><strong>Chế độ Khách:</strong> Gỡ cài đặt ứng dụng sẽ xóa vĩnh viễn toàn bộ dữ liệu cục bộ trên thiết bị của bạn.</li>
+                </ul>
+                <div class="box green">🗑️ Sau khi xác nhận xóa tài khoản, toàn bộ dữ liệu liên quan sẽ bị xóa vĩnh viễn và không thể phục hồi khỏi máy chủ của chúng tôi.</div>`
+            },
+            {
+                num: "8", title: "Cập Nhật Chính Sách", badge: "Cập nhật", badgeClass: "green",
+                body: `<p>Chính sách này có thể được sửa đổi định kỳ để phản ánh các thay đổi trong ứng dụng hoặc các quy định pháp lý hiện hành. Mọi cập nhật sẽ được ghi nhận bằng ngày sửa đổi mới tại đầu trang. Việc tiếp tục sử dụng ứng dụng sau khi chính sách được cập nhật đồng nghĩa với việc bạn chấp nhận các điều khoản đã sửa đổi.</p>`
+            },
+            {
+                num: "9", title: "Liên Hệ", badge: "Liên hệ", badgeClass: "blue",
+                body: `
+                <p>Nếu bạn có câu hỏi về Chính sách này hoặc muốn gửi yêu cầu xóa dữ liệu, vui lòng liên hệ:</p>
+                <div class="box green">✉️ <strong>Email:</strong> <a href="mailto:Bookingforjob.dev@gmail.com">Bookingforjob.dev@gmail.com</a><br>🏢 <strong>Nhà phát triển:</strong> GUNGSA STUDIO</div>`
+            }
+        ]
     }
+};
+
+var currentLang = 'en';
+
+function render(lang) {
+    var d = DATA[lang];
+    document.getElementById('h-title').textContent = d.title;
+    document.getElementById('h-date').textContent = d.date;
+    document.getElementById('f-tagline').textContent = d.tagline;
+
+    var html = '';
+    d.sections.forEach(function(s) {
+        var badgeHtml = s.badge ? '<span class="badge ' + s.badgeClass + '">' + s.badge + '</span>' : '';
+        html += '<section><h2>' + s.num + '. ' + s.title + ' ' + badgeHtml + '</h2>' + s.body + '</section>';
+    });
+    document.getElementById('content').innerHTML = html;
+}
+
+function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-vi').classList.toggle('active', lang === 'vi');
+    render(lang);
+}
+
+// Init
+render('en');
 </script>
 </body>
 </html>
