@@ -120,6 +120,25 @@
             z-index: 1;
         }
 
+        /* PAID BADGE in header */
+        .header-paid-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--yellow);
+            border: 3px solid var(--black);
+            box-shadow: 4px 4px 0px var(--black);
+            padding: 8px 20px;
+            margin-top: 18px;
+            font-weight: 800;
+            font-size: 0.82rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--black);
+            position: relative;
+            z-index: 1;
+        }
+
         /* MAIN */
         main {
             max-width: 800px;
@@ -133,6 +152,13 @@
             padding: 28px;
             margin-bottom: 24px;
         }
+
+        /* Highlighted section for business model */
+        section.highlight-section {
+            background: #fdfaf0;
+            border-color: var(--black);
+        }
+
         section h2 {
             font-weight: 800;
             font-size: 1.1rem;
@@ -181,6 +207,36 @@
         .box.blue   { background: var(--blue); }
         .box.yellow { background: var(--yellow); }
 
+        /* Pillars grid for business model */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+        .pillar {
+            border: 3px solid var(--black);
+            padding: 18px 16px;
+            text-align: center;
+        }
+        .pillar.p-green  { background: var(--green); }
+        .pillar.p-yellow { background: var(--yellow); }
+        .pillar.p-blue   { background: var(--blue); }
+        .pillar .pill-icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .pillar .pill-title {
+            font-weight: 800;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .pillar .pill-desc {
+            font-size: 0.82rem;
+            color: #3a3a3a;
+            line-height: 1.5;
+            margin: 0;
+        }
+
         a { color: var(--purple); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--purple); }
         a:hover { background: var(--purple); color: white; }
 
@@ -206,6 +262,7 @@
         @media (max-width: 600px) {
             header h1 { font-size: 1.6rem; }
             section { padding: 20px; }
+            .pillars { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -222,6 +279,7 @@
     <div class="logo"><span>GUNGSA STUDIO</span></div>
     <h1 id="h-title">Privacy Policy</h1>
     <p class="updated" id="h-date">Last updated: March 18, 2026</p>
+    <div class="header-paid-badge" id="h-paid-badge">⭐ Paid App &nbsp;·&nbsp; No Ads &nbsp;·&nbsp; No Data Selling &nbsp;·&nbsp; One-Time Purchase</div>
 </header>
 
 <!-- MAIN -->
@@ -239,17 +297,41 @@ var DATA = {
     en: {
         title: "Privacy Policy",
         date: "Last updated: March 18, 2026",
+        paidBadge: "⭐ Paid App &nbsp;·&nbsp; No Ads &nbsp;·&nbsp; No Data Selling &nbsp;·&nbsp; One-Time Purchase",
         tagline: "Focus Tasks — Your productivity, your privacy.",
         sections: [
             {
-                num: "1", title: "Introduction", badge: "", badgeClass: "",
+                num: "1", title: "Introduction", badge: "", badgeClass: "", highlight: false,
                 body: `
                 <p><strong>Focus Tasks</strong> is a productivity application developed by <strong>GUNGSA STUDIO</strong>. We are committed to protecting your privacy and handling your personal data responsibly and transparently.</p>
                 <p>This Privacy Policy describes the information we collect, how it is used and stored, and the rights available to you. By using Focus Tasks, you acknowledge that you have read and agree to the practices described herein.</p>
                 <div class="box green">🔒 Focus Tasks is built on a <strong>privacy-first</strong> principle. We collect only what is strictly necessary to deliver the service — nothing more.</div>`
             },
             {
-                num: "2", title: "Information We Collect", badge: "Data", badgeClass: "green",
+                num: "2", title: "Business Model & Pricing", badge: "Paid App", badgeClass: "", highlight: true,
+                body: `
+                <p>Focus Tasks is a <strong>paid application</strong>. Our business model is straightforward and user-friendly — we charge a single, one-time fee so you never have to worry about recurring subscriptions, hidden costs, or your data being monetized.</p>
+                <div class="pillars">
+                    <div class="pillar p-yellow">
+                        <div class="pill-icon">🚫</div>
+                        <div class="pill-title">Zero Ads</div>
+                        <p class="pill-desc">Focus Tasks contains <strong>no advertisements</strong> of any kind. Your experience is clean, distraction-free, and never influenced by third-party advertisers.</p>
+                    </div>
+                    <div class="pillar p-green">
+                        <div class="pill-icon">🛡️</div>
+                        <div class="pill-title">Data Never Sold</div>
+                        <p class="pill-desc">We do <strong>not sell, rent, or trade</strong> your personal data to any third party — ever. Your data belongs to you alone.</p>
+                    </div>
+                    <div class="pillar p-blue">
+                        <div class="pill-icon">💳</div>
+                        <div class="pill-title">One-Time Purchase</div>
+                        <p class="pill-desc">Pay <strong>once</strong> on Google Play and enjoy full, lifetime access to the app. No subscription. No renewal fees.</p>
+                    </div>
+                </div>
+                <div class="box yellow" style="margin-top:20px">⭐ <strong>Why paid?</strong> Because you are our customer — not our product. A one-time purchase allows us to build a great app without relying on ads or data monetization to sustain it.</div>`
+            },
+            {
+                num: "3", title: "Information We Collect", badge: "Data", badgeClass: "green", highlight: false,
                 body: `
                 <p>The information we collect depends on the mode in which you choose to use the app:</p>
                 <ul>
@@ -257,10 +339,12 @@ var DATA = {
                     <li><strong>Google Sign-In:</strong> When you sign in with a Google account, we receive your <strong>name</strong> and <strong>email address</strong> via Google's authentication service. This information is used solely to identify your account and enable cross-device synchronization. We do not access any other Google services or data on your behalf.</li>
                     <li><strong>Anonymous Sign-In:</strong> You may use the app through a temporary session without providing any personal information. Anonymous sessions cannot be recovered if the app is uninstalled or app data is cleared.</li>
                     <li><strong>App Content:</strong> When signed in, we store the content you create — tasks, checklists, completion records, reminders, and settings — for the purpose of synchronization across your devices.</li>
-                </ul>`
+                    <li><strong>Purchase Verification:</strong> Google Play handles all payment processing. We do not store or have access to your payment details (card number, billing address, etc.). We may receive only a confirmation token from Google Play to verify that a valid purchase has been made.</li>
+                </ul>
+                <div class="box green">🛡️ We do <strong>not sell, share, or monetize</strong> your personal data in any form, to any party, for any purpose.</div>`
             },
             {
-                num: "3", title: "Data Storage & Synchronization", badge: "Storage", badgeClass: "blue",
+                num: "4", title: "Data Storage & Synchronization", badge: "Storage", badgeClass: "blue", highlight: false,
                 body: `
                 <p>Focus Tasks is designed with an <strong>offline-first</strong> architecture. The app functions fully without an internet connection. Cloud synchronization is an optional feature available exclusively to signed-in users.</p>
                 <ul>
@@ -270,7 +354,7 @@ var DATA = {
                 <div class="box blue">☁️ Cloud synchronization is only active when you are signed in. Data belonging to Guest users never leaves their device.</div>`
             },
             {
-                num: "4", title: "Third-Party Services", badge: "Services", badgeClass: "",
+                num: "5", title: "Third-Party Services", badge: "Services", badgeClass: "", highlight: false,
                 body: `
                 <p>Focus Tasks relies on the following Google Firebase services to support core functionality:</p>
                 <ul>
@@ -278,11 +362,13 @@ var DATA = {
                     <li><strong>Firebase Cloud Firestore:</strong> Stores and synchronizes your task data securely in the cloud.</li>
                     <li><strong>Firebase Crashlytics & Performance Monitoring:</strong> Collects anonymized diagnostic data to help us identify errors and improve app reliability. No personally identifiable information is included in these reports.</li>
                     <li><strong>Firebase Cloud Messaging:</strong> Delivers system notifications and in-app announcements. This service is not used for marketing or promotional communications.</li>
+                    <li><strong>Google Play Billing:</strong> Handles all payment transactions for the one-time purchase. We do not receive or store any payment card details — all billing is managed securely by Google.</li>
                 </ul>
-                <p>These services are governed by Google's data processing terms. Please refer to the <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a> for further details.</p>`
+                <p>These services are governed by Google's data processing terms. Please refer to the <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a> for further details.</p>
+                <div class="box yellow">🚫 <strong>No advertising SDKs or analytics platforms are integrated</strong> in Focus Tasks. We have no relationship with any ad network.</div>`
             },
             {
-                num: "5", title: "App Permissions", badge: "Permissions", badgeClass: "green",
+                num: "6", title: "App Permissions", badge: "Permissions", badgeClass: "green", highlight: false,
                 body: `
                 <p>Focus Tasks requests only the permissions necessary to deliver its reminder functionality:</p>
                 <ul>
@@ -293,7 +379,7 @@ var DATA = {
                 <div class="box yellow">⚠️ These permissions are used <strong>solely</strong> for reminder delivery and are never used for tracking, advertising, or any form of data collection.</div>`
             },
             {
-                num: "6", title: "Data Security", badge: "Security", badgeClass: "blue",
+                num: "7", title: "Data Security", badge: "Security", badgeClass: "blue", highlight: false,
                 body: `
                 <p>We implement appropriate technical measures to protect your data from unauthorized access or disclosure:</p>
                 <ul>
@@ -303,7 +389,7 @@ var DATA = {
                 </ul>`
             },
             {
-                num: "7", title: "Your Data Rights", badge: "Rights", badgeClass: "",
+                num: "8", title: "Your Data Rights", badge: "Rights", badgeClass: "", highlight: false,
                 body: `
                 <p>You retain full control over your data at all times:</p>
                 <ul>
@@ -314,11 +400,11 @@ var DATA = {
                 <div class="box green">🗑️ Upon confirmed account deletion, all associated data is permanently and irreversibly removed from our servers.</div>`
             },
             {
-                num: "8", title: "Policy Updates", badge: "Updates", badgeClass: "green",
+                num: "9", title: "Policy Updates", badge: "Updates", badgeClass: "green", highlight: false,
                 body: `<p>This Privacy Policy may be revised periodically to reflect changes in the app or applicable regulations. Any updates will be indicated by a revised date at the top of this page. Continued use of the app following a policy update constitutes acceptance of the revised terms.</p>`
             },
             {
-                num: "9", title: "Contact", badge: "Contact", badgeClass: "blue",
+                num: "10", title: "Contact", badge: "Contact", badgeClass: "blue", highlight: false,
                 body: `
                 <p>For questions regarding this Privacy Policy or to submit a data deletion request, please contact us:</p>
                 <div class="box green">✉️ <strong>Email:</strong> <a href="mailto:Bookingforjob.dev@gmail.com">Bookingforjob.dev@gmail.com</a><br>🏢 <strong>Developer:</strong> GUNGSA STUDIO</div>`
@@ -328,17 +414,41 @@ var DATA = {
     vi: {
         title: "Chính Sách Quyền Riêng Tư",
         date: "Cập nhật lần cuối: 18 tháng 3, 2026",
+        paidBadge: "⭐ Ứng Dụng Trả Phí &nbsp;·&nbsp; Không Quảng Cáo &nbsp;·&nbsp; Không Bán Dữ Liệu &nbsp;·&nbsp; Mua Một Lần Dùng Mãi",
         tagline: "Focus Tasks — Năng suất của bạn, quyền riêng tư của bạn.",
         sections: [
             {
-                num: "1", title: "Giới Thiệu", badge: "Tổng quan", badgeClass: "",
+                num: "1", title: "Giới Thiệu", badge: "Tổng quan", badgeClass: "", highlight: false,
                 body: `
                 <p><strong>Focus Tasks</strong> là ứng dụng năng suất được phát triển bởi <strong>GUNGSA STUDIO</strong>. Chúng tôi cam kết bảo vệ quyền riêng tư và xử lý dữ liệu cá nhân của bạn một cách có trách nhiệm và minh bạch.</p>
                 <p>Chính sách này mô tả thông tin chúng tôi thu thập, cách thức sử dụng và lưu trữ, cũng như các quyền bạn có đối với dữ liệu của mình. Bằng việc sử dụng Focus Tasks, bạn xác nhận đã đọc và đồng ý với các điều khoản được nêu tại đây.</p>
                 <div class="box green">🔒 Focus Tasks được xây dựng trên nguyên tắc <strong>ưu tiên quyền riêng tư</strong>. Chúng tôi chỉ thu thập những gì thực sự cần thiết để cung cấp dịch vụ — không hơn, không kém.</div>`
             },
             {
-                num: "2", title: "Thông Tin Chúng Tôi Thu Thập", badge: "Dữ liệu", badgeClass: "green",
+                num: "2", title: "Mô Hình Kinh Doanh & Thanh Toán", badge: "Trả Phí", badgeClass: "", highlight: true,
+                body: `
+                <p>Focus Tasks là <strong>ứng dụng trả phí</strong>. Mô hình kinh doanh của chúng tôi rõ ràng và thân thiện với người dùng — bạn chỉ trả một lần duy nhất, không lo về phí định kỳ, chi phí ẩn, hay dữ liệu của bạn bị khai thác vì mục đích thương mại.</p>
+                <div class="pillars">
+                    <div class="pillar p-yellow">
+                        <div class="pill-icon">🚫</div>
+                        <div class="pill-title">Không Quảng Cáo</div>
+                        <p class="pill-desc">Focus Tasks <strong>hoàn toàn không có quảng cáo</strong> dưới bất kỳ hình thức nào. Trải nghiệm của bạn luôn sạch sẽ và không bị làm phiền.</p>
+                    </div>
+                    <div class="pillar p-green">
+                        <div class="pill-icon">🛡️</div>
+                        <div class="pill-title">Không Bán Dữ Liệu</div>
+                        <p class="pill-desc">Chúng tôi <strong>không bán, cho thuê hay chia sẻ</strong> dữ liệu cá nhân của bạn cho bất kỳ bên thứ ba nào — không bao giờ.</p>
+                    </div>
+                    <div class="pillar p-blue">
+                        <div class="pill-icon">💳</div>
+                        <div class="pill-title">Mua Một Lần</div>
+                        <p class="pill-desc">Thanh toán <strong>một lần duy nhất</strong> qua Google Play và sử dụng trọn đời. Không có gói đăng ký. Không phí gia hạn.</p>
+                    </div>
+                </div>
+                <div class="box yellow" style="margin-top:20px">⭐ <strong>Tại sao lại trả phí?</strong> Vì bạn là khách hàng của chúng tôi — không phải là "sản phẩm". Khoản phí một lần cho phép chúng tôi tập trung xây dựng ứng dụng chất lượng mà không cần dựa vào quảng cáo hay khai thác dữ liệu.</div>`
+            },
+            {
+                num: "3", title: "Thông Tin Chúng Tôi Thu Thập", badge: "Dữ liệu", badgeClass: "green", highlight: false,
                 body: `
                 <p>Thông tin được thu thập phụ thuộc vào chế độ bạn lựa chọn khi sử dụng ứng dụng:</p>
                 <ul>
@@ -346,10 +456,12 @@ var DATA = {
                     <li><strong>Đăng nhập bằng Google:</strong> Khi bạn đăng nhập qua tài khoản Google, chúng tôi nhận được <strong>tên</strong> và <strong>địa chỉ email</strong> của bạn thông qua dịch vụ xác thực của Google. Thông tin này chỉ được sử dụng để nhận dạng tài khoản và kích hoạt đồng bộ giữa các thiết bị. Chúng tôi không truy cập bất kỳ dịch vụ hay dữ liệu Google nào khác của bạn.</li>
                     <li><strong>Đăng nhập Ẩn danh:</strong> Bạn có thể sử dụng ứng dụng qua phiên tạm thời mà không cần cung cấp thông tin cá nhân. Phiên ẩn danh không thể khôi phục nếu ứng dụng bị gỡ cài đặt hoặc dữ liệu bị xóa.</li>
                     <li><strong>Nội dung ứng dụng:</strong> Khi đã đăng nhập, chúng tôi lưu trữ nội dung bạn tạo ra — nhiệm vụ, danh sách kiểm tra, lịch sử hoàn thành, nhắc nhở và tùy chỉnh — phục vụ mục đích đồng bộ hóa giữa các thiết bị.</li>
-                </ul>`
+                    <li><strong>Xác minh thanh toán:</strong> Toàn bộ giao dịch thanh toán được xử lý bởi Google Play. Chúng tôi không lưu trữ hay có quyền truy cập thông tin thẻ thanh toán của bạn. Chúng tôi chỉ nhận một mã xác nhận từ Google Play để kiểm tra tính hợp lệ của giao dịch mua.</li>
+                </ul>
+                <div class="box green">🛡️ Chúng tôi <strong>không bán, chia sẻ hay kiếm tiền</strong> từ dữ liệu cá nhân của bạn dưới bất kỳ hình thức nào, với bất kỳ bên nào, vì bất kỳ mục đích nào.</div>`
             },
             {
-                num: "3", title: "Lưu Trữ & Đồng Bộ Dữ Liệu", badge: "Lưu trữ", badgeClass: "blue",
+                num: "4", title: "Lưu Trữ & Đồng Bộ Dữ Liệu", badge: "Lưu trữ", badgeClass: "blue", highlight: false,
                 body: `
                 <p>Focus Tasks được thiết kế theo kiến trúc <strong>ưu tiên ngoại tuyến</strong>. Ứng dụng hoạt động đầy đủ mà không cần kết nối internet. Đồng bộ đám mây là tính năng tùy chọn chỉ dành cho người dùng đã đăng nhập.</p>
                 <ul>
@@ -359,7 +471,7 @@ var DATA = {
                 <div class="box blue">☁️ Đồng bộ đám mây chỉ hoạt động khi bạn đã đăng nhập. Dữ liệu của người dùng Chế độ Khách không bao giờ rời khỏi thiết bị của họ.</div>`
             },
             {
-                num: "4", title: "Dịch Vụ Bên Thứ Ba", badge: "Dịch vụ", badgeClass: "",
+                num: "5", title: "Dịch Vụ Bên Thứ Ba", badge: "Dịch vụ", badgeClass: "", highlight: false,
                 body: `
                 <p>Focus Tasks sử dụng các dịch vụ Google Firebase sau để hỗ trợ các tính năng cốt lõi:</p>
                 <ul>
@@ -367,11 +479,13 @@ var DATA = {
                     <li><strong>Firebase Cloud Firestore:</strong> Lưu trữ và đồng bộ hóa dữ liệu nhiệm vụ của bạn trên đám mây.</li>
                     <li><strong>Firebase Crashlytics & Performance Monitoring:</strong> Thu thập dữ liệu chẩn đoán ẩn danh để giúp chúng tôi xác định lỗi và cải thiện độ ổn định ứng dụng. Không có thông tin định danh cá nhân nào được thu thập.</li>
                     <li><strong>Firebase Cloud Messaging:</strong> Gửi thông báo hệ thống và thông báo nội bộ từ GUNGSA STUDIO. Dịch vụ này không được dùng cho mục đích tiếp thị.</li>
+                    <li><strong>Google Play Billing:</strong> Xử lý toàn bộ giao dịch thanh toán một lần. Chúng tôi không nhận hay lưu bất kỳ thông tin thẻ ngân hàng nào — mọi thanh toán được quản lý bảo mật bởi Google.</li>
                 </ul>
-                <p>Các dịch vụ này tuân theo điều khoản xử lý dữ liệu của Google. Vui lòng tham khảo <a href="https://policies.google.com/privacy" target="_blank">Chính sách quyền riêng tư của Google</a> để biết thêm chi tiết.</p>`
+                <p>Các dịch vụ này tuân theo điều khoản xử lý dữ liệu của Google. Vui lòng tham khảo <a href="https://policies.google.com/privacy" target="_blank">Chính sách quyền riêng tư của Google</a> để biết thêm chi tiết.</p>
+                <div class="box yellow">🚫 <strong>Focus Tasks không tích hợp bất kỳ SDK quảng cáo hay nền tảng phân tích thương mại nào.</strong> Chúng tôi không có quan hệ với bất kỳ mạng quảng cáo nào.</div>`
             },
             {
-                num: "5", title: "Quyền Truy Cập Ứng Dụng", badge: "Quyền", badgeClass: "green",
+                num: "6", title: "Quyền Truy Cập Ứng Dụng", badge: "Quyền", badgeClass: "green", highlight: false,
                 body: `
                 <p>Focus Tasks chỉ yêu cầu các quyền cần thiết cho chức năng nhắc nhở:</p>
                 <ul>
@@ -382,7 +496,7 @@ var DATA = {
                 <div class="box yellow">⚠️ Các quyền này được sử dụng <strong>duy nhất</strong> cho chức năng nhắc nhở và không bao giờ được dùng cho mục đích theo dõi, quảng cáo hay thu thập dữ liệu.</div>`
             },
             {
-                num: "6", title: "Bảo Mật Dữ Liệu", badge: "Bảo mật", badgeClass: "blue",
+                num: "7", title: "Bảo Mật Dữ Liệu", badge: "Bảo mật", badgeClass: "blue", highlight: false,
                 body: `
                 <p>Chúng tôi triển khai các biện pháp kỹ thuật phù hợp để bảo vệ dữ liệu của bạn:</p>
                 <ul>
@@ -392,7 +506,7 @@ var DATA = {
                 </ul>`
             },
             {
-                num: "7", title: "Quyền Của Bạn", badge: "Quyền hạn", badgeClass: "",
+                num: "8", title: "Quyền Của Bạn", badge: "Quyền hạn", badgeClass: "", highlight: false,
                 body: `
                 <p>Bạn luôn có toàn quyền kiểm soát dữ liệu của mình:</p>
                 <ul>
@@ -403,11 +517,11 @@ var DATA = {
                 <div class="box green">🗑️ Sau khi xác nhận xóa tài khoản, toàn bộ dữ liệu liên quan sẽ bị xóa vĩnh viễn và không thể phục hồi khỏi máy chủ của chúng tôi.</div>`
             },
             {
-                num: "8", title: "Cập Nhật Chính Sách", badge: "Cập nhật", badgeClass: "green",
+                num: "9", title: "Cập Nhật Chính Sách", badge: "Cập nhật", badgeClass: "green", highlight: false,
                 body: `<p>Chính sách này có thể được sửa đổi định kỳ để phản ánh các thay đổi trong ứng dụng hoặc các quy định pháp lý hiện hành. Mọi cập nhật sẽ được ghi nhận bằng ngày sửa đổi mới tại đầu trang. Việc tiếp tục sử dụng ứng dụng sau khi chính sách được cập nhật đồng nghĩa với việc bạn chấp nhận các điều khoản đã sửa đổi.</p>`
             },
             {
-                num: "9", title: "Liên Hệ", badge: "Liên hệ", badgeClass: "blue",
+                num: "10", title: "Liên Hệ", badge: "Liên hệ", badgeClass: "blue", highlight: false,
                 body: `
                 <p>Nếu bạn có câu hỏi về Chính sách này hoặc muốn gửi yêu cầu xóa dữ liệu, vui lòng liên hệ:</p>
                 <div class="box green">✉️ <strong>Email:</strong> <a href="mailto:Bookingforjob.dev@gmail.com">Bookingforjob.dev@gmail.com</a><br>🏢 <strong>Nhà phát triển:</strong> GUNGSA STUDIO</div>`
@@ -422,12 +536,14 @@ function render(lang) {
     var d = DATA[lang];
     document.getElementById('h-title').textContent = d.title;
     document.getElementById('h-date').textContent = d.date;
+    document.getElementById('h-paid-badge').innerHTML = d.paidBadge;
     document.getElementById('f-tagline').textContent = d.tagline;
 
     var html = '';
     d.sections.forEach(function(s) {
         var badgeHtml = s.badge ? '<span class="badge ' + s.badgeClass + '">' + s.badge + '</span>' : '';
-        html += '<section><h2>' + s.num + '. ' + s.title + ' ' + badgeHtml + '</h2>' + s.body + '</section>';
+        var sectionClass = s.highlight ? 'class="highlight-section"' : '';
+        html += '<section ' + sectionClass + '><h2>' + s.num + '. ' + s.title + ' ' + badgeHtml + '</h2>' + s.body + '</section>';
     });
     document.getElementById('content').innerHTML = html;
 }
